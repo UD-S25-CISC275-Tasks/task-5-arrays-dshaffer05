@@ -5,12 +5,12 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    if(!numbers[0]) {
+    if (!numbers[0]) {
         return numbers;
     }
     let endNumbers: number[] = [];
     endNumbers.push(numbers[0]);
-    endNumbers.push(numbers[-1]);
+    endNumbers.push(numbers[numbers.length - 1]);
     return endNumbers;
 }
 
@@ -19,7 +19,7 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    const tripled = numbers.map((num: number): number => num*3);
+    const tripled = numbers.map((num: number): number => num * 3);
     return tripled;
 }
 
@@ -28,7 +28,9 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    const ints = numbers.map((num: string): number => (Number(num)) ? (Number(num)): 0);
+    const ints = numbers.map((num: string): number =>
+        Number(num) ? Number(num) : 0,
+    );
     return ints;
 }
 
@@ -40,7 +42,15 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    // Filter
+    const filteredAmounts = amounts.filter(
+        (amount: string): boolean => amount[0] !== "$",
+    );
+    // Map
+    const ints = filteredAmounts.map((num: string): number =>
+        Number(num) ? Number(num) : 0,
+    );
+    return ints;
 };
 
 /**
@@ -49,7 +59,15 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    // Filter
+    const noQuest = messages.filter(
+        (message: string): boolean => message[message.length - 1] !== "?",
+    );
+    // Map
+    const shouted = noQuest.map((message: string): string =>
+        message[messages.length - 1] === "!" ? message.toUpperCase() : message,
+    );
+    return shouted;
 };
 
 /**
